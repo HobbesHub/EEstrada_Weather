@@ -3,4 +3,4 @@
 
 //apikey for openweathermap API access 
 
-export const apiKey = "b0bb308922887642a5d7fe5054695311"; 
+export const apiKey = "cf12e036ffb54077b7c19cba5c2985ac"; 

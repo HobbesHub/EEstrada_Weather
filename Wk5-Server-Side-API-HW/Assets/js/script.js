@@ -133,6 +133,28 @@ $(function () {
             .then(function (data) { //data returned from fetch call with geoCordURL
                 removeOldWeatherForecast();
 
+                // ...
+                fetch(geoCordURL)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    // Extract coordinates from the data returned by geocoding API
+                    coords.lat = data[0].lat; // Assuming latitude is the first element in the returned data
+                    coords.lon = data[0].lon; // Assuming longitude is the first element in the returned data
+
+                    removeOldWeatherForecast();
+
+                    // Make another fetch call to get current day forecast
+                    var forecastRequestUrl = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + coords.lat + '&lon=' + coords.lon + '&cnt=40&units=imperial&appid=' + apiKey;
+                    fetch(forecastRequestUrl)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            // ... (rest of the code remains the same)
+                        });
+                });
                 //**TO_DO**: get coordinates from the data returned by geocoding API
                 
                 //**TO_DO**:  Make another fetch call to the openweathermap API with coordinates to get current day forecast
